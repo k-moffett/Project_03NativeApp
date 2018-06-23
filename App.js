@@ -2,12 +2,37 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      test: ''
+    }
+  }
+  
+  componentDidMount() {
+    this.setInitialState()
+  }
+
+  setInitialState() {
+    fetch('http://ec2-54-144-190-124.compute-1.amazonaws.com/')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson.item)
+      this.setState({
+        test: responseJson.item
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+  
+  
   render() {
+
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>{this.state.test}</Text>
       </View>
     );
   }
