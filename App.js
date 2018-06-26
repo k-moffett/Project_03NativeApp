@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import Test from './components/test'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
+      displayName: '',
+      email: '',
       password: ''
     }
   }
@@ -14,14 +16,15 @@ export default class App extends React.Component {
     console.log('handleSubmitUserInfoYOO')
     // http working. 
     // https not working. maybe something with the ec2 security group settings?
-    fetch('http://ec2-54-89-68-6.compute-1.amazonaws.com/signUp', {
+    fetch('http://ec2-54-152-128-213.compute-1.amazonaws.com/signUp', {
       method: 'POST',
       headers: {
          Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: this.state.name,
+        displayName: this.state.displayName,
+        email: this.state.email,
         password: this.state.password
       })
     })
@@ -31,11 +34,17 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-      <Text>Name:</Text>
+      <Text>Display Name:</Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(name) => this.setState({name})}
-          value={this.state.name}
+          onChangeText={(displayName) => this.setState({displayName})}
+          value={this.state.displayName}
+        />
+      <Text>Email</Text>
+      <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(email) => this.setState({email})}
+          value={this.state.email}
         />
       <Text>Password:</Text>
         <TextInput
@@ -43,7 +52,7 @@ export default class App extends React.Component {
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
         />
-        <Button
+        <Button style={styles.button}
           onPress={(e) => {this.submitUserInfo()}}
           title="Submit user info"
           color="#841584"
