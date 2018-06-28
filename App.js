@@ -1,64 +1,109 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, StatusBar } from 'react-native';
+import Routes from './src/Routes';
+
+
+import Landingpage from './src/components/Landingpage';
+import Register from './src/components/Register';
+import Login from './src/components/Login';
+
+
 
 export default class App extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      password: ''
+      currentComponent: 'one',
     }
-  }
-  
-  submitUserInfo() {
-    console.log('handleSubmitUserInfoYOO')
-    // http working. 
-    // https not working. maybe something with the ec2 security group settings?
-    fetch('http://ec2-54-89-68-6.compute-1.amazonaws.com/signUp', {
-      method: 'POST',
-      headers: {
-         Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        password: this.state.password
-      })
-    })
-  }
-  
+ 
+  };
+  componentOne() {
+    return (
+      <View>
+        <Landingpage />
+      </View>
+    )
+  };
+
+  componentTwo() {
+    return (
+      <View>
+        <Login />
+      </View>
+    )
+  };
+
+  componentThree() {
+    return (
+      <View>
+        <Register />
+      </View>
+    )
+  };
+
+  handleViewChange() {
+    let view = ''
+    switch (this.state.currentComponent) {
+      case 'one':
+        view = this.componentOne()
+        break;
+      case 'two':
+        view = this.componentTwo()
+        break;
+      case 'three':
+        view = this.componentThree()
+        break;
+      default:
+        view = this.componentOne()
+
+    };
+    return view;
+  };
+
+
   render() {
 
     return (
+      // <View style={styles.container}>
+
+      //   <View>
+      //     <Landingpage />
+      //   </View>
+
+      //   <View>
+      //     <Register />
+      //   </View>
+
+      //   <View>
+      //     <Login />
+      //   </View>
+
+      // </View>
+
+
       <View style={styles.container}>
-      <Text>Name:</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(name) => this.setState({name})}
-          value={this.state.name}
-        />
-      <Text>Password:</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(password) => this.setState({password})}
-          value={this.state.password}
-        />
-        <Button
-          onPress={(e) => {this.submitUserInfo()}}
-          title="Submit user info"
-          color="#841584"
-          accessibilityLabel="Submit user info"
-        />
+
+
+        {this.handleViewChange()}
+
       </View>
     );
   }
 }
 
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#29377E',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
+
