@@ -1,7 +1,14 @@
+const userController = require('../controllers/userController')
+
 module.exports = (app) => {
 
-    app.get('/', function(req, res) {
-        res.send('Got some shit!');
+    app.get('/', (req, res) => {
+        console.log('Got Root')
+        res.send({item: 'Got some shit yo!'});
+    });
+    app.post('/signUp', (req, res) => {
+        userController.newUser(req.body);
+        res.send('Got the request');
     });
 
 }
