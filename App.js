@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { LandingPage, HomePage, Register, Login } from './components/index'
+import { LandingPage, HomePage, Register, Login,GeolocationExample } from './components/index'
 
 export default class App extends React. Component {
     constructor(props) {
@@ -33,6 +33,10 @@ export default class App extends React. Component {
 	    case 'HomePage':
 		component = <HomePage goTo={this.goTo} />
 		break;
+		case 'GeolocationExample':
+		component = <GeolocationExample goTo={this.goTo} />
+		break;
+
 	    default:
 		component = <LandingPage goTo={this.goTo} />
 	}

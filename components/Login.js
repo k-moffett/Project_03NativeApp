@@ -40,7 +40,7 @@ export default class Login extends React.Component {
 		    style={styles.logo}
 		/>
 
-		<Text style={styles.header}>Login</Text>
+		<Text style={styles.header}>login</Text>
 
 		<TextInput
                     placeholder="email"

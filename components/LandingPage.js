@@ -27,6 +27,12 @@ export default class LandingPage extends React.Component {
                     <Text style={styles.btntext} >Login</Text>
                 </TouchableHighlight>
 
+                <TouchableHighlight
+                    onPress={(e) => {this.props.goTo('GeolocationExample')}}
+                    style={styles.button}>
+                    <Text style={styles.btntext} >test location</Text>
+                </TouchableHighlight>
+
 		<Text style={styles.textinput} >Forgot Password?</Text>
             </View>
         );
