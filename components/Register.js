@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, AsyncStorage } from 'react-native'
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class Register extends React.Component {
     }
 
     submit() {
-        fetch('http://ec2-54-89-68-6.compute-1.amazonaws.com/signUp', {
+	fetch('http://app.surroundm.com/register', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -26,13 +26,24 @@ export default class Register extends React.Component {
 	})
 	.then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson);
+            console.log(responseJson.sessid, 'responseJson');
+	    this.storeItem(`${responseJson.sessid}`)
             })
-        .catch((error) => {
-            console.error(error);
-            });    
+	.then((response) => {this.props.goTo('HomePage')})
+	.catch((error) => {
+           console.error(error);
+        });
     }
 
+    async storeItem(item) {
+	    console.log(item, 'storeItem')
+        try {
+            let jsonOfItem = await AsyncStorage.setItem('sessid',item);
+            console.log('Stored in Async')
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
 
     render() {
         return (
