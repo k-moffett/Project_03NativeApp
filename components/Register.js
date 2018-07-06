@@ -26,10 +26,14 @@ export default class Register extends React.Component {
 	})
 	.then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson.sessid, 'responseJson');
+            console.log(responseJson.sessid, 'responseJson'); 
+	    if (responseJson.emailCheck === 'account exists') {
+	        console.log('Account with that email already exists.')
+	    } else {
 	    this.storeItem(`${responseJson.sessid}`)
-            })
-	.then((response) => {this.props.goTo('HomePage')})
+            this.props.goTo('HomePage')
+	    }
+        })
 	.catch((error) => {
            console.error(error);
         });
