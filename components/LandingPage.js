@@ -16,16 +16,16 @@ export default class LandingPage extends React.Component {
 		/>
 
 		<TouchableHighlight
-                    onPress={(e) => {this.props.goTo('Register')}}
-                    style={styles.button}>
-                    <Text style={styles.btntext}>Create Account</Text>
-                </TouchableHighlight>
+            onPress={(e) => {this.props.goTo('Register')}}
+            style={styles.button}>
+            <Text style={styles.btntext}>Create Account</Text>
+        </TouchableHighlight>
 
-                <TouchableHighlight
-                    onPress={(e) => {this.props.goTo('Login')}}
-                    style={styles.button}>
-                    <Text style={styles.btntext} >Login</Text>
-                </TouchableHighlight>
+        <TouchableHighlight
+            onPress={(e) => {this.props.goTo('Login')}}
+            style={styles.button}>
+            <Text style={styles.btntext} >Login</Text>
+        </TouchableHighlight>
 
 		<Text style={styles.textinput} >Forgot Password?</Text>
             </View>
