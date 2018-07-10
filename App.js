@@ -15,7 +15,7 @@ export default class App extends React. Component {
     goTo(component) {
         this.setState({
 		currentComponent: component
-	})
+		})
     }
  
     currentView() {
@@ -31,7 +31,7 @@ export default class App extends React. Component {
 		component = <Login goTo={this.goTo} />
 		break;
 	    case 'HomePage':
-		component = <HomePage goTo={this.goTo} />
+		component = <HomePage />
 		break;
 	    default:
 		component = <LandingPage goTo={this.goTo} />

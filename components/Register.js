@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList, AsyncStorage } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class Register extends React.Component {
@@ -17,8 +17,7 @@ export default class Register extends React.Component {
     }
 
     submit() {
-
-        fetch('http://ec2-54-89-68-6.compute-1.amazonaws.com/signUp', {
+	fetch('http://app.surroundm.com/register', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -29,16 +28,31 @@ export default class Register extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             })
+	})
+	.then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson.sessid, 'responseJson'); 
+	    if (responseJson.emailCheck === 'account exists') {
+	        console.log('Account with that email already exists.')
+	    } else {
+	    this.storeItem(`${responseJson.sessid}`)
+            this.props.goTo('HomePage')
+	    }
         })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+	.catch((error) => {
+           console.error(error);
+        });
     }
 
+    async storeItem(item) {
+	    console.log(item, 'storeItem')
+        try {
+            let jsonOfItem = await AsyncStorage.setItem('sessid',item);
+            console.log('Stored in Async')
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
 
     validate(input, type) {
         alph = /^[a-zA-Z0-9]+$/

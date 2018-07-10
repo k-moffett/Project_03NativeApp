@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList, AsyncStorage} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -16,8 +17,7 @@ export default class Login extends React.Component {
     }
 
     submit() {
-
-        fetch('http://ec2-54-89-68-6.compute-1.amazonaws.com/signUp', {
+        fetch('http://app.surroundm.com/login', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -27,10 +27,16 @@ export default class Login extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             })
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
+
+	})
+	.then((response) => response.json())
+        .then((responseJson) => {
+            if (responseJson.passCheck === 'correct') {
+	        this.storeItem(`${responseJson.sessid}`)
+		this.props.goTo('HomePage')
+	        } else {
+		    console.log(responseJson.passCheck)
+		}
             })
             .catch((error) => {
                 console.error(error);
@@ -77,6 +83,16 @@ export default class Login extends React.Component {
                     passwordValdate: false
                 })
             }
+        }
+    }
+
+    async storeItem(item) {
+	    console.log(item, 'storeItem')
+        try {
+            let jsonOfItem = await AsyncStorage.setItem('sessid',item);
+            console.log('Stored in Async')
+        } catch (error) {
+          console.log(error.message);
         }
     }
 
