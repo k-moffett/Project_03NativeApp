@@ -22,6 +22,7 @@ export default class LandingPage extends React.Component {
                         <Text style={styles.btntext}>Create Account</Text>
                     </TouchableHighlight>
                 </LinearGradient>
+
                 <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
                     <TouchableHighlight
                         onPress={(e) => { this.props.goTo('Login') }}
@@ -29,7 +30,6 @@ export default class LandingPage extends React.Component {
                         <Text style={styles.btntext} >Login</Text>
                     </TouchableHighlight>
                 </LinearGradient>
-                {/* <Text style={styles.textinput} >Forgot Password?</Text> */}
 
                 <TouchableOpacity activeOpacity={0.6} >
                     <Text style={styles.forgetPassword}>Forget Password</Text>

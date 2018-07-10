@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -11,6 +10,8 @@ export default class Login extends React.Component {
             password: '',
             emailValdate: true,
             passwordValdate: true,
+            passwordNoteShow: false
+
         }
     }
 
@@ -39,7 +40,8 @@ export default class Login extends React.Component {
 
     validate(input, type) {
         alph = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
-        alph2 = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
+        // alph2 = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
+        alph2 = /^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
 
         if (type === 'email') {
 
@@ -60,12 +62,14 @@ export default class Login extends React.Component {
         else if (type === 'password') {
 
             this.setState({
-                password: input
+                password: input,
+                passwordNoteShow: true
             })
             if (alph2.test(input)) {
                 this.setState({
                     password: input,
-                    passwordValdate: true
+                    passwordValdate: true,
+                    passwordNoteShow: false
                 })
 
             } else {
@@ -84,9 +88,7 @@ export default class Login extends React.Component {
                     source={require('../images/SurrounDM.png')}
                     style={styles.logo}
                 />
-
                 <Text style={styles.header}>Login</Text>
-
 
                 <TextInput
                     error={this.state.email.error !== ''}
@@ -107,10 +109,30 @@ export default class Login extends React.Component {
                     // onChangeText={(password) => this.setState({ password })}
                     onChangeText={(password) => { this.validate(password, 'password') }}
                     value={this.state.password}
+                    secureTextEntry={true}
+                    onFocus={() => this.validate('password')}
                 />
 
-                {!this.state.emailValdate && <Text style={styles.textError}>email format is incorrect or email is empty</Text>}
-                {!this.state.passwordValdate && <Text style={styles.textError}>password can not be empty</Text>}
+
+                {/* {!this.state.emailValdate && <Text style={styles.notetext}>email format is incorrect or email is empty</Text>} */}
+                {!this.state.emailValdate && <FlatList
+                    data={[
+                        { key: 'email format is incorrect or email is empty' }
+                    ]}
+                    renderItem={({ item }) => <Text style={styles.notetext}>{item.key}</Text>}
+                />}
+
+                {/* {this.state.passwordNoteShow && <Text style={styles.notetext}>*password can not be empty *1 special character *1 Capital Letter </Text>} */}
+                {this.state.passwordNoteShow && <FlatList
+                    data={[
+                        { key: 'Password can not be empty' },
+                        { key: 'Password should be min 6 characters' },
+                        { key: 'Password should includes minimum one number' },
+                        { key: 'Password should includes Small and Capital letters' },
+                        { key: 'Password should be has minimum one special character' },
+                    ]}
+                    renderItem={({ item }) => <Text style={styles.notetext}>{item.key}</Text>}
+                />}
 
                 <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
                     <TouchableHighlight
@@ -194,12 +216,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     error: {
-        borderWidth: 1,
-        borderColor: '#ed2f2f',
+        borderBottomWidth: 1,
+        // borderColor: '#ed2f2f',
         borderBottomColor: '#c0392b',
     },
     textError: {
         color: '#c0392b',
+    },
+    notetext: {
+        color: '#fff'
     }
-
 });
