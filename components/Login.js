@@ -26,15 +26,15 @@ export default class Login extends React.Component {
                 password: this.state.password
             })
 
-	})
-	.then((response) => response.json())
-        .then((responseJson) => {
-            if (responseJson.passCheck === 'correct') {
-	        this.storeItem(`${responseJson.sessid}`)
-		this.props.goTo('HomePage')
-	        } else {
-		    console.log(responseJson.passCheck)
-		}
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.passCheck === 'correct') {
+                    this.storeItem(`${responseJson.sessid}`)
+                    this.props.goTo('HomePage')
+                } else {
+                    console.log(responseJson.passCheck)
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -85,12 +85,12 @@ export default class Login extends React.Component {
     }
 
     async storeItem(item) {
-	    console.log(item, 'storeItem')
+        console.log(item, 'storeItem')
         try {
-            let jsonOfItem = await AsyncStorage.setItem('sessid',item);
+            let jsonOfItem = await AsyncStorage.setItem('sessid', item);
             console.log('Stored in Async')
         } catch (error) {
-          console.log(error.message);
+            console.log(error.message);
         }
     }
 
@@ -148,17 +148,17 @@ export default class Login extends React.Component {
                     renderItem={({ item }) => <Text style={styles.notetext}>{item.key}</Text>}
                 />}
 
-                    <TouchableHighlight
-                        onPress={(e) => { this.submit() }}
-                        style={styles.button}>
-                        <Text style={styles.btntext}>Login</Text>
-                    </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={(e) => { this.submit() }}
+                    style={styles.button}>
+                    <Text style={styles.btntext}>Login</Text>
+                </TouchableHighlight>
 
-                    <TouchableHighlight
-                        onPress={(e) => { this.props.goTo('Landing') }}
-                        style={styles.button}>
-                        <Text style={styles.btntext}>Back</Text>
-                    </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={(e) => { this.props.goTo('Landing') }}
+                    style={styles.button}>
+                    <Text style={styles.btntext}>Back</Text>
+                </TouchableHighlight>
             </View >
         );
     }
@@ -217,9 +217,14 @@ const styles = StyleSheet.create({
 
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 10,
         marginRight: 25,
         marginLeft: 25,
         padding: 10,
+
+        backgroundColor: '#426bd7',
+        borderRadius: 25,
+        width: 200,
     },
     btntext: {
         color: '#fff',
