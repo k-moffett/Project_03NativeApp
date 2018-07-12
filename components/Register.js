@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, TextInput, Image, FlatList, AsyncStorage } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -174,26 +173,21 @@ export default class Register extends React.Component {
                     renderItem={({ item }) => <Text style={styles.notetext}>{item.key}</Text>}
                 />}
 
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
                     <TouchableHighlight
                         onPress={(e) => { this.submit() }}
                         style={styles.button}>
                         <Text style={styles.btntext}>Create Account</Text>
                     </TouchableHighlight>
-                </LinearGradient>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
+
                     <TouchableHighlight
                         onPress={(e) => { this.props.goTo('Landing') }}
                         style={styles.button}>
                         <Text style={styles.btntext}>Back</Text>
                     </TouchableHighlight>
-                </LinearGradient>
             </View>
         );
     }
 }
-
-
 
 const styles = StyleSheet.create({
 

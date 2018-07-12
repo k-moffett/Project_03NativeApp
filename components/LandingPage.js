@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 export default class LandingPage extends React.Component {
     constructor(props) {
@@ -15,21 +14,17 @@ export default class LandingPage extends React.Component {
                     source={require('../images/SurrounDM.png')}
                     style={styles.logo}
                 />
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
                     <TouchableHighlight
                         onPress={(e) => { this.props.goTo('Register') }}
                         style={styles.button}>
                         <Text style={styles.btntext}>Create Account</Text>
                     </TouchableHighlight>
-                </LinearGradient>
 
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4A4A4A', '#EFEFEF']} style={styles.mainButton}>
                     <TouchableHighlight
                         onPress={(e) => { this.props.goTo('Login') }}
                         style={styles.button}>
                         <Text style={styles.btntext} >Login</Text>
                     </TouchableHighlight>
-                </LinearGradient>
 
                 <TouchableOpacity activeOpacity={0.6} >
                     <Text style={styles.forgetPassword}>Forget Password</Text>
