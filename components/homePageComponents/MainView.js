@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, ScrollView, Image, TextInput } from 'react-native'
 
 export default class MainView extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state = { text: 'Enter Chat Name Here' }
     }
 
     checkSessid() {
@@ -15,27 +16,19 @@ export default class MainView extends React.Component {
         this.props.goTo('LandingPage')
     }
 
-    createChat() {
-        console.log('create chat')
+    enterChat() {
+        this.props.goTo('ChatRoom')
+    }
+
+    addChat() {
+        console.log('create chat in firebase named: ', this.state.text)
+        console.log('query firebase to update all chats in the scoll view')
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                {/* <Text>Main View</Text> */}
 
-                <Image
-                    source={require('./../../images/SurrounDM.png')}
-                    style={styles.logo}
-                />
-
-
-                <TouchableHighlight
-                    style={styles.button}
-                    onPress={(e) => { this.checkSessid() }}
-                >
-                    <Text style={styles.btntext}>Sessid</Text>
-                </TouchableHighlight>
+        return(
+            <View>
 
                 <TouchableHighlight
                     style={styles.button}
@@ -44,23 +37,51 @@ export default class MainView extends React.Component {
                     <Text style={styles.btntext}>Log Out</Text>
                 </TouchableHighlight>
 
+                <TextInput 
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.text}
+                />
+
                 <TouchableHighlight
-                    style={styles.button}
-                    onPress={(e) => { this.createChat() }}
+                    onPress={(e) => {this.addChat()}}
                 >
-                    <Text style={styles.btntext}>Create Chat</Text>
+                <Text>Add Chat</Text>
                 </TouchableHighlight>
 
-                {/* <ScrollView>
-                    {[...Array(100)].map((item, index) => {
+                <Text>Chatrooms around me within: 1 mile</Text>
+
+                <ScrollView>
+                    {/* {[...Array(100)].map((item, index) => {
                         return(
                             <View>
                                 <Text>{index}</Text>
                             </View>
                         )
-                    })}
-                </ScrollView> */}
-            </View>
+                    })} */}
+
+                <TouchableHighlight
+                    onPress={(e) => {console.log('button click motherfucker.')}}
+                >
+                <Text>This is what a chatroom button will look like</Text>
+                </TouchableHighlight>
+
+                </ScrollView>
+
+                {/*Test*/}
+                <TouchableHighlight
+                    onPress={(e) => {this.checkSessid()}}
+                >
+                <Text>Sessid</Text>
+                </TouchableHighlight>
+
+                {/*Test*/}
+                <TouchableHighlight
+                    onPress={(e) => {this.enterChat()}}
+                >
+                <Text>Enter Chat</Text>
+                </TouchableHighlight>
+
+	        </View>
         )
     }
 }
