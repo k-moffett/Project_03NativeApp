@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
-import { LandingPage, MainView, CreateChat, ChatRoom } from './homePageComponents/index'
+import { View, AsyncStorage } from 'react-native'
+import { LandingPage, MainView, ChatRoom } from './homePageComponents/index'
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -39,9 +39,6 @@ export default class HomePage extends React.Component {
         switch(this.state.currentComponent) {
         case 'LandingPage':
             component = <LandingPage />
-        break;
-        case 'CreateChat':
-            component = <CreateChat goTo={this.goTo} />
         break;
         case 'ChatRoom':
             component = <ChatRoom goTo={this.goTo} />

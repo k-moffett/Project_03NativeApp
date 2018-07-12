@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, ScrollView, TextInput } from 'react-native'
 
 export default class MainView extends React.Component {
     constructor(props) {
         super(props)
+        this.state = { text: 'Enter Chat Name Here' }
     }
 
     checkSessid() {
@@ -14,20 +15,18 @@ export default class MainView extends React.Component {
         this.props.goTo('LandingPage')
     }
 
-    createChat() {
-        console.log('create chat')
+    enterChat() {
+        this.props.goTo('ChatRoom')
+    }
+
+    addChat() {
+        console.log('create chat in firebase named: ', this.state.text)
+        console.log('query firebase to update all chats in the scoll view')
     }
 
     render() {
         return(
             <View>
-		        <Text>Main View</Text>
-                
-                <TouchableHighlight
-                    onPress={(e) => {this.checkSessid()}}
-                >
-                <Text>Sessid</Text>
-                </TouchableHighlight>
 
                 <TouchableHighlight
                     onPress={(e) => {this.logout()}}
@@ -35,21 +34,50 @@ export default class MainView extends React.Component {
                 <Text>Log Out</Text>
                 </TouchableHighlight>
 
+                <TextInput 
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.text}
+                />
+
                 <TouchableHighlight
-                    onPress={(e) => {this.createChat()}}
+                    onPress={(e) => {this.addChat()}}
                 >
-                <Text>Create Chat</Text>
+                <Text>Add Chat</Text>
                 </TouchableHighlight>
 
-                {/* <ScrollView>
-                    {[...Array(100)].map((item, index) => {
+                <Text>Chatrooms around me within: 1 mile</Text>
+
+                <ScrollView>
+                    {/* {[...Array(100)].map((item, index) => {
                         return(
                             <View>
                                 <Text>{index}</Text>
                             </View>
                         )
-                    })}
-                </ScrollView> */}
+                    })} */}
+
+                <TouchableHighlight
+                    onPress={(e) => {console.log('button click motherfucker.')}}
+                >
+                <Text>This is what a chatroom button will look like</Text>
+                </TouchableHighlight>
+
+                </ScrollView>
+
+                {/*Test*/}
+                <TouchableHighlight
+                    onPress={(e) => {this.checkSessid()}}
+                >
+                <Text>Sessid</Text>
+                </TouchableHighlight>
+
+                {/*Test*/}
+                <TouchableHighlight
+                    onPress={(e) => {this.enterChat()}}
+                >
+                <Text>Enter Chat</Text>
+                </TouchableHighlight>
+
 	        </View>
         )
     }

@@ -29,6 +29,7 @@ export default class LandingPage extends React.Component {
                 <TouchableOpacity activeOpacity={0.6} >
                     <Text style={styles.forgetPassword}>Forget Password</Text>
                 </TouchableOpacity>
+                
             </View>
 
         );
