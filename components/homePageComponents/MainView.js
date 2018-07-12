@@ -70,15 +70,15 @@ const styles = StyleSheet.create({
 
     container: {
         backgroundColor: '#29377E',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         height: '100%',
     },
     logo: {
+      
         width: 200,
         height: 30,
-        marginBottom: 20
-
+        marginBottom: 20,
     },
     button: {
         // alignSelf: 'stretch',
@@ -106,3 +106,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 })
+
+
+
