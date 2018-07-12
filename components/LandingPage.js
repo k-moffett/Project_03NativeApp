@@ -14,21 +14,21 @@ export default class LandingPage extends React.Component {
                     source={require('../images/SurrounDM.png')}
                     style={styles.logo}
                 />
-                    <TouchableHighlight
-                        onPress={(e) => { this.props.goTo('Register') }}
-                        style={styles.button}>
-                        <Text style={styles.btntext}>Create Account</Text>
-                    </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={(e) => { this.props.goTo('Register') }}
+                    style={styles.button}>
+                    <Text style={styles.btntext}>Create Account</Text>
+                </TouchableHighlight>
 
-                    <TouchableHighlight
-                        onPress={(e) => { this.props.goTo('Login') }}
-                        style={styles.button}>
-                        <Text style={styles.btntext} >Login</Text>
-                    </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={(e) => { this.props.goTo('Login') }}
+                    style={styles.button}>
+                    <Text style={styles.btntext} >Login</Text>
+                </TouchableHighlight>
 
-                <TouchableOpacity activeOpacity={0.6} >
+                {/* <TouchableOpacity activeOpacity={0.6} >
                     <Text style={styles.forgetPassword}>Forget Password</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
         );
@@ -86,9 +86,14 @@ const styles = StyleSheet.create({
 
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 10,
         marginRight: 25,
         marginLeft: 25,
         padding: 10,
+
+        backgroundColor: '#426bd7',
+        borderRadius: 25,
+        width: 200,
     },
     btntext: {
         color: '#fff',
