@@ -7,7 +7,7 @@ export default class HomePage extends React.Component {
         super(props)
         this.state = {
             currentComponent: 'MainView',
-            sessid: ''
+            sessid: '',
         }
         this.currentView = this.currentView.bind(this)
         this.goTo = this.goTo.bind(this)

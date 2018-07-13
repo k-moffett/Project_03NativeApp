@@ -8,21 +8,46 @@ export default class MainView extends React.Component {
         this.state = { text: 'Enter Chat Name Here' }
     }
 
-    checkSessid() {
-        console.log('SESSID: ', this.props.sessid)
+    componentWillMount() {
+        this.getUserInfo()
+    }
+
+    getUserInfo() {
+        fetch('http://app.surroundm.com/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sessid: this.props.sessid,
+            })
+
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson)
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     logout() {
         this.props.goTo('LandingPage')
     }
 
-    enterChat() {
-        this.props.goTo('ChatRoom')
-    }
-
     addChat() {
         console.log('create chat in firebase named: ', this.state.text)
         console.log('query firebase to update all chats in the scoll view')
+    }
+    
+    checkSessid() {
+        console.log('SESSID: ', this.props.sessid)
+    }
+
+    enterChat() {
+        this.props.goTo('ChatRoom')
     }
 
     render() {
