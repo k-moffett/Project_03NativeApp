@@ -8,12 +8,8 @@ export default class MainView extends React.Component {
         this.state = { text: 'Enter Chat Name Here' }
     }
 
-    componentWillMount() {
-        this.getUserInfo()
-    }
-
-    getUserInfo() {
-        fetch('http://app.surroundm.com/login', {
+    getUsername() {
+        fetch('http://app.surroundm.com/getUser', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -26,7 +22,7 @@ export default class MainView extends React.Component {
         })
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson)
+            console.log(responseJson[0].username)
         })
         .catch((error) => {
             console.error(error);
@@ -104,6 +100,13 @@ export default class MainView extends React.Component {
                     onPress={(e) => {this.enterChat()}}
                 >
                 <Text>Enter Chat</Text>
+                </TouchableHighlight>
+
+                {/*Test*/}
+                <TouchableHighlight
+                    onPress={(e) => {this.getUsername()}}
+                >
+                <Text>Get Info</Text>
                 </TouchableHighlight>
 
 	        </View>

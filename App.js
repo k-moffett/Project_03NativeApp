@@ -6,7 +6,8 @@ export default class App extends React. Component {
     constructor(props) {
         super(props)
 	this.state = {
-		currentComponent: 'LandingPage'
+		currentComponent: 'LandingPage',
+		sessid: ''
 	}
 	this.currentView = this.currentView.bind(this)
 	this.goTo = this.goTo.bind(this)
@@ -16,7 +17,7 @@ export default class App extends React. Component {
         this.setState({
 		currentComponent: component
 		})
-    }
+	}
  
     currentView() {
       let component
@@ -25,13 +26,13 @@ export default class App extends React. Component {
 	        component = <LandingPage goTo={this.goTo} />
 		break;
 	    case 'Register':
-		component = <Register goTo={this.goTo} />
+		component = <Register goTo={this.goTo} setSessid={this.setSessid} />
 		break;
 	    case 'Login':
-		component = <Login goTo={this.goTo} />
+		component = <Login goTo={this.goTo} setSessid={this.setSessid} />
 		break;
 	    case 'HomePage':
-		component = <HomePage />
+		component = <HomePage sessid={this.state.sessid} />
 		break;
 	    default:
 		component = <LandingPage goTo={this.goTo} />

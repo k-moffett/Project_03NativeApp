@@ -9,8 +9,7 @@ export default class Login extends React.Component {
             password: '',
             emailValdate: true,
             passwordValdate: true,
-            passwordNoteShow: false
-
+            passwordNoteShow: false,
         }
     }
 
