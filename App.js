@@ -1,6 +1,9 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { LandingPage, HomePage, Register, Login } from './components/index'
+import { LandingPage, HomePage, Register, Login } from './components/index';
+
+// import MainView from './components/homePageComponents/MainView';
+// import ChatRoom from './components/homePageComponents/ChatRoom';
 
 export default class App extends React. Component {
     constructor(props) {
